@@ -530,7 +530,15 @@
 
                     <td class="price">
                     <button class="btn btn-primary fw-bold text-decoration-none"><a href="editservlet?code=<%=b.getCode()%>" class="text-dark">Edit</a></button>
-                    <button class = "btn btn-danger fw-bold"><a href=""></a>🗑️ Delete</button>
+                        <form action="delete" method="post" style="display:inline;">
+                            <input type="hidden" name="code" value="<%=b.getCode()%>">
+
+                            <button type="submit"
+                                    class="btn btn-danger fw-bold"
+                                    onclick="return confirm('Are you sure you want to delete this book?');">
+                                🗑️ Delete
+                            </button>
+                        </form>
                     </td>
 
                 </tr>

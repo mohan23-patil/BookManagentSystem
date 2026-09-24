@@ -2,12 +2,17 @@
          contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 
+<%
+    String message = (String) request.getAttribute("msg");
+    String messageType = (String) request.getAttribute("type");
+%>
+
 <html>
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
           rel="stylesheet">
 
@@ -24,8 +29,6 @@
             min-height: 100vh;
         }
 
-        /* LEFT SIDE */
-
         .left-section {
             min-height: 100vh;
             background: linear-gradient(135deg, #182848, #4b6cb7);
@@ -34,6 +37,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+
             padding: 50px;
         }
 
@@ -77,8 +81,6 @@
             font-size: 20px;
             margin-right: 10px;
         }
-
-        /* RIGHT SIDE */
 
         .right-section {
             min-height: 100vh;
@@ -153,7 +155,92 @@
             text-decoration: underline;
         }
 
-        /* MOBILE */
+        /* LOGIN POPUP */
+
+        .login-popup {
+            position: fixed;
+
+            right: 25px;
+            bottom: 25px;
+
+            min-width: 320px;
+
+            padding: 16px 20px;
+
+            border-radius: 12px;
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,0.20);
+
+            z-index: 9999;
+
+            animation: popupShow 0.4s ease;
+        }
+
+        .login-popup.success {
+            background: #198754;
+        }
+
+        .login-popup.failed {
+            background: #dc3545;
+        }
+
+        .popup-icon {
+            width: 32px;
+            height: 32px;
+
+            min-width: 32px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.20);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+        .login-popup.hide {
+            animation: popupHide 0.5s ease forwards;
+        }
+
+        @keyframes popupShow {
+
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        @keyframes popupHide {
+
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+        }
 
         @media(max-width: 768px) {
 
@@ -169,18 +256,27 @@
                 padding: 30px 25px;
             }
 
+            .login-popup {
+                right: 15px;
+                left: 15px;
+                bottom: 15px;
+
+                min-width: auto;
+            }
+
         }
 
     </style>
+
 </head>
+
 <body>
+
 <form action="login" method="post">
 
     <div class="container-fluid">
 
         <div class="row main-container">
-
-            <!-- LEFT SIDE -->
 
             <div class="col-lg-6 left-section">
 
@@ -218,7 +314,6 @@
                 </div>
 
             </div>
-            <!-- RIGHT SIDE -->
 
             <div class="col-lg-6 right-section">
 
@@ -250,14 +345,13 @@
 
                             <input type="text"
                                    class="form-control"
-                                   placeholder="Enter username" name = "aname">
+                                   placeholder="Enter username"
+                                   name="aname"
+                                   required>
 
                         </div>
 
                     </div>
-
-
-                    <!-- PASSWORD -->
 
                     <div class="mb-4">
 
@@ -273,24 +367,20 @@
 
                             <input type="password"
                                    class="form-control"
-                                   placeholder="Enter password" name="pword">
+                                   placeholder="Enter password"
+                                   name="pword"
+                                   required>
 
                         </div>
 
                     </div>
 
+                    <button type="submit"
+                            class="btn btn-primary login-btn w-100">
 
-                    <!-- LOGIN BUTTON -->
-
-                    <button class="btn btn-primary login-btn w-100">
-
-                        👉
-                        Login
+                        👉 Login
 
                     </button>
-
-
-                    <!-- REGISTER -->
 
                     <div class="text-center mt-4">
 
@@ -298,7 +388,7 @@
                             Don't have an account?
                         </span>
 
-                        <a href="admin_Registration.html"
+                        <a href="admin_Registration.jsp"
                            class="register-link ms-1">
 
                             Create Account
@@ -316,6 +406,49 @@
     </div>
 
 </form>
+
+
+<%
+    if (message != null)
+    {
+%>
+
+<div class="login-popup <%= "success".equals(messageType) ? "success" : "failed" %>"
+     id="loginPopup">
+
+    <div class="popup-icon">
+        <%= "success".equals(messageType) ? "✓" : "✕" %>
+    </div>
+
+    <div>
+        <%= message %>
+    </div>
+
+</div>
+
+<script>
+
+    setTimeout(function()
+    {
+        const popup = document.getElementById("loginPopup");
+
+        if (popup)
+        {
+            popup.classList.add("hide");
+
+            setTimeout(function()
+            {
+                popup.remove();
+            }, 500);
+        }
+
+    }, 5000);
+
+</script>
+
+<%
+    }
+%>
 
 </body>
 </html>

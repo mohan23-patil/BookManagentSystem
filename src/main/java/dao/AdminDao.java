@@ -37,7 +37,7 @@ public class AdminDao
         try
         {
             Connection con = DBConnection.getConnection();
-            PreparedStatement pstm = con.prepareStatement("select * from adminBook where adminname = ? and password = ?");
+            PreparedStatement pstm = con.prepareStatement("select * from adminbook where adminname = ? and password = ?");
             pstm.setString(1,name);
             pstm.setString(2,pass);
             ResultSet rs = pstm.executeQuery();

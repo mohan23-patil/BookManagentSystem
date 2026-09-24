@@ -19,12 +19,12 @@ public class BookDeleteServlet extends HttpServlet
         if (k > 0)
         {
             req.setAttribute("msg","Book Deleted SuccessFully");
-            req.getRequestDispatcher("delete_Success.jsp").forward(req,resp);
+            req.getRequestDispatcher("viewAllBook.jsp").forward(req,resp);
         }
         else
         {
             req.setAttribute("msg","Book is Not Deleted ");
-            req.getRequestDispatcher("delete_Failed.jsp").forward(req,resp);
+            req.getRequestDispatcher("viewAllBook.jsp").forward(req,resp);
         }
     }
 }

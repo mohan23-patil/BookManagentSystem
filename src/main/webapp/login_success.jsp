@@ -1,16 +1,16 @@
 <%@ page language="java"
          contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" import = "entity.Admin"%>
+         pageEncoding="UTF-8"
+         import="entity.Admin"%>
 
 <html>
 <head>
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
           rel="stylesheet">
-
 
     <style>
 
@@ -20,7 +20,6 @@
             font-family: Arial, sans-serif;
             color: #182848;
         }
-
 
         /* =========================
            NAVBAR
@@ -32,7 +31,6 @@
             padding: 15px 35px;
         }
 
-
         .brand {
             font-size: 25px;
             font-weight: bold;
@@ -40,19 +38,16 @@
             text-decoration: none;
         }
 
-
         .brand i {
             color: #4b6cb7;
             margin-right: 8px;
         }
-
 
         .logout-btn {
             border-radius: 10px;
             padding: 9px 18px;
             font-weight: 600;
         }
-
 
         /* =========================
            HERO SECTION
@@ -71,12 +66,10 @@
             box-shadow: 0 12px 30px rgba(75, 108, 183, 0.20);
         }
 
-
         .hero-title {
             font-size: 38px;
             font-weight: bold;
         }
-
 
         .hero-text {
             color: #e5e7eb;
@@ -84,12 +77,10 @@
             margin-top: 10px;
         }
 
-
         .hero-icon {
             font-size: 100px;
             opacity: 0.15;
         }
-
 
         /* =========================
            SECTION TITLE
@@ -100,7 +91,6 @@
             margin-top: 45px;
             margin-bottom: 25px;
         }
-
 
         /* =========================
            DASHBOARD CARDS
@@ -122,7 +112,6 @@
             transition: 0.3s;
         }
 
-
         .dashboard-card:hover {
             transform: translateY(-7px);
 
@@ -130,9 +119,7 @@
                 0 15px 35px rgba(0, 0, 0, 0.10);
         }
 
-
         .card-icon {
-
             width: 70px;
             height: 70px;
 
@@ -147,24 +134,20 @@
             margin-bottom: 22px;
         }
 
-
         .add-icon {
             background: #e8f0ff;
             color: #4b6cb7;
         }
-
 
         .view-icon {
             background: #e9f9f0;
             color: #198754;
         }
 
-
         .search-icon {
             background: #fff3df;
             color: #f59e0b;
         }
-
 
         .card-title {
             font-size: 22px;
@@ -172,12 +155,10 @@
             margin-bottom: 12px;
         }
 
-
         .card-text {
             color: #6b7280;
             line-height: 1.6;
         }
-
 
         .card-btn {
             border-radius: 10px;
@@ -186,13 +167,11 @@
             margin-top: 10px;
         }
 
-
         /* =========================
            QUICK INFO
         ========================= */
 
         .info-box {
-
             background: white;
 
             border-radius: 18px;
@@ -204,9 +183,7 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
         }
 
-
         .info-icon {
-
             width: 50px;
             height: 50px;
 
@@ -223,13 +200,11 @@
             font-size: 24px;
         }
 
-
         /* =========================
            FOOTER
         ========================= */
 
         footer {
-
             margin-top: 50px;
 
             padding: 25px;
@@ -241,6 +216,90 @@
             font-size: 14px;
         }
 
+        /* =========================
+           SUCCESS POPUP
+        ========================= */
+
+        .success-popup {
+            position: fixed;
+
+            right: 25px;
+            bottom: 25px;
+
+            min-width: 320px;
+
+            padding: 16px 20px;
+
+            border-radius: 12px;
+
+            background: #198754;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.20);
+
+            z-index: 9999;
+
+            animation: popupShow 0.4s ease;
+        }
+
+        .popup-icon {
+            width: 32px;
+            height: 32px;
+
+            min-width: 32px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.20);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+        .success-popup.hide {
+            animation: popupHide 0.5s ease forwards;
+        }
+
+        @keyframes popupShow {
+
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        @keyframes popupHide {
+
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+        }
 
         /* =========================
            MOBILE
@@ -264,291 +323,286 @@
                 display: none;
             }
 
+            .success-popup {
+                right: 15px;
+                left: 15px;
+                bottom: 15px;
+
+                min-width: auto;
+            }
+
         }
 
     </style>
- </head>
+
+</head>
+
 <body>
+
 <%
-    String name = (String)session.getAttribute("name");
- %>
- <nav class="navbar">
+    String name = (String) session.getAttribute("name");
+%>
 
-     <div class="container-fluid">
+<nav class="navbar">
 
-         <!-- LOGO -->
+    <div class="container-fluid">
 
-         <a href="#" class="brand">
-          📚 BookVault
-         </a>
+        <a href="#" class="brand">
+            📚 BookVault
+        </a>
 
+        <a href="adminLogin.jsp"
+           class="btn btn-outline-danger logout-btn">
 
-         <!-- LOGOUT -->
+            👉 Logout
 
-         <a href="adminLogin.jsp"
-            class="btn btn-outline-danger logout-btn">
-               👉 Logout
-         </a>
+        </a>
 
-     </div>
+    </div>
 
- </nav>
- <div class="container">
+</nav>
 
 
-     <!-- =================================
-          HERO
-     ================================== -->
+<div class="container">
 
-     <div class="hero-section">
+    <!-- =================================
+         HERO
+    ================================== -->
 
-         <div class="row align-items-center">
+    <div class="hero-section">
 
-             <div class="col-md-8">
+        <div class="row align-items-center">
 
-                 <p class="mb-2 fw-semibold">
+            <div class="col-md-8">
 
-                     ADMIN DASHBOARD
+                <p class="mb-2 fw-semibold">
+                    ADMIN DASHBOARD
+                </p>
 
-                 </p>
+                <h1 class="hero-title">
+                    Welcome Back, <%= name %>👋
+                </h1>
 
+                <p class="hero-text mb-0">
+                    Manage your books, update records,
+                    and keep your library organized
+                    from one place.
+                </p>
 
-                 <h1 class="hero-title">
+            </div>
 
-                     Welcome Back, <%=name%>👋
+            <div class="col-md-4 text-center">
 
-                 </h1>
+                <i class="bi bi-journals hero-icon"></i>
 
+            </div>
 
-                 <p class="hero-text mb-0">
+        </div>
 
-                     Manage your books, update records,
-                     and keep your library organized
-                     from one place.
-
-                 </p>
-
-             </div>
-
-
-             <div class="col-md-4 text-center">
-
-                 <i class="bi bi-journals hero-icon"></i>
-
-             </div>
-
-         </div>
-
-     </div>
+    </div>
 
 
+    <!-- =================================
+         MANAGEMENT SECTION
+    ================================== -->
 
-     <!-- =================================
-          MANAGEMENT SECTION
-     ================================== -->
-
-     <h2 class="section-title">
-
+    <h2 class="section-title">
         📚 Book Management
-
-     </h2>
-
-
-     <div class="row g-4">
+    </h2>
 
 
-         <!-- =============================
-              ADD BOOK
-         ============================== -->
+    <div class="row g-4">
 
-         <div class="col-lg-4 col-md-6">
+        <!-- =============================
+             ADD BOOK
+        ============================== -->
 
-             <div class="dashboard-card">
+        <div class="col-lg-4 col-md-6">
 
+            <div class="dashboard-card">
 
-                 <div class="card-icon add-icon">
+                <div class="card-icon add-icon">
+                    <i class="bi bi-plus-lg"></i>
+                </div>
 
-                     <i class="bi bi-plus-lg"></i>
+                <h3 class="card-title">
+                    Add New Book
+                </h3>
 
-                 </div>
+                <p class="card-text">
+                    Add a new book to your library.
+                    Enter book details and store
+                    them in your collection.
+                </p>
 
-
-                 <h3 class="card-title">
-
-                     Add New Book
-
-                 </h3>
-
-
-                 <p class="card-text">
-
-                     Add a new book to your library.
-                     Enter book details and store
-                     them in your collection.
-
-                 </p>
-
-
-                 <a href="addBook.html"
-                    class="btn btn-primary card-btn">
-
-
+                <a href="addBook.html"
+                   class="btn btn-primary card-btn">
 
                     👉 Add Book
 
-                 </a>
+                </a>
+
+            </div>
+
+        </div>
 
 
-             </div>
+        <!-- =============================
+             VIEW ALL BOOKS
+        ============================== -->
 
-         </div>
+        <div class="col-lg-4 col-md-6">
 
+            <div class="dashboard-card">
 
+                <div class="card-icon view-icon">
+                    <i class="bi bi-collection"></i>
+                </div>
 
-         <!-- =============================
-              VIEW ALL BOOKS
-         ============================== -->
-
-         <div class="col-lg-4 col-md-6">
-
-             <div class="dashboard-card">
-
-
-                 <div class="card-icon view-icon">
-
-                     <i class="bi bi-collection"></i>
-
-                 </div>
-
-
-                 <h3 class="card-title">
-
+                <h3 class="card-title">
                     📖 View All Books
+                </h3>
 
-                 </h3>
+                <p class="card-text">
+                    View your complete book collection
+                    and manage existing book records
+                    from one place.
+                </p>
 
+                <a href="viewAllBook"
+                   class="btn btn-success card-btn">
 
-                 <p class="card-text">
+                    👀 View All Books
 
-                     View your complete book collection
-                     and manage existing book records
-                     from one place.
+                </a>
 
-                 </p>
+            </div>
 
-
-                 <a href="viewAllBook"
-                    class="btn btn-success card-btn">
-
-                     👀
-                     View All Books
-
-                 </a>
+        </div>
 
 
-             </div>
+        <!-- =============================
+             VIEW BY ID
+        ============================== -->
 
-         </div>
+        <div class="col-lg-4 col-md-6">
 
+            <div class="dashboard-card">
 
+                <div class="card-icon search-icon">
+                    <i class="bi bi-search"></i>
+                </div>
 
-         <!-- =============================
-              VIEW BY ID
-         ============================== -->
+                <h3 class="card-title">
+                    Find Book
+                </h3>
 
-         <div class="col-lg-4 col-md-6">
+                <p class="card-text">
+                    Search for a specific book using
+                    its Book ID and quickly view
+                    its complete details.
+                </p>
 
-             <div class="dashboard-card">
-
-
-                 <div class="card-icon search-icon">
-
-                     <i class="bi bi-search"></i>
-
-                 </div>
-
-
-                 <h3 class="card-title">
-
-                     Find Book
-
-                 </h3>
-
-
-                 <p class="card-text">
-
-                     Search for a specific book using
-                     its Book ID and quickly view
-                     its complete details.
-
-                 </p>
-
-
-                 <a href="viewBookByID.html"
-                    class="btn btn-warning card-btn">
+                <a href="viewBookByID.html"
+                   class="btn btn-warning card-btn">
 
                     🔎 Find Book
 
-                 </a>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
 
 
-             </div>
+    <!-- =================================
+         QUICK INFO
+    ================================== -->
 
-         </div>
+    <div class="info-box">
 
+        <div class="row align-items-center">
 
-     </div>
+            <div class="col-auto">
 
+                <div class="info-icon">
+                    <i class="bi bi-lightbulb"></i>
+                </div>
 
+            </div>
 
-     <!-- =================================
-          QUICK INFO
-     ================================== -->
+            <div class="col">
 
-     <div class="info-box">
+                <h5 class="fw-bold mb-1">
+                    Quick Tip
+                </h5>
 
-         <div class="row align-items-center">
+                <p class="text-muted mb-0">
+                    Use the options above to add,
+                    view, search, update, or delete
+                    books from your library.
+                </p>
 
+            </div>
 
-             <div class="col-auto">
+        </div>
 
-                 <div class="info-icon">
+    </div>
 
-                     <i class="bi bi-lightbulb"></i>
-
-                 </div>
-
-             </div>
-
-
-             <div class="col">
-
-                 <h5 class="fw-bold mb-1">
-
-                     Quick Tip
-
-                 </h5>
-
-
-                 <p class="text-muted mb-0">
-
-                     Use the options above to add,
-                     view, search, update, or delete
-                     books from your library.
-
-                 </p>
-
-             </div>
+</div>
 
 
-         </div>
+<footer>
 
-     </div>
- </div>
- <footer>
+    © 2026 BookVault · Book Management System
 
-     © 2026 BookVault · Book Management System
+</footer>
 
- </footer>
+
+<%
+    String message = (String) request.getAttribute("msg");
+
+    if (message != null)
+    {
+%>
+
+<div class="success-popup" id="successPopup">
+
+    <div class="popup-icon">
+        ✓
+    </div>
+
+    <div>
+        <%= message %>
+    </div>
+
+</div>
+
+<script>
+
+    setTimeout(function()
+    {
+        const popup = document.getElementById("successPopup");
+
+        if (popup)
+        {
+            popup.classList.add("hide");
+
+            setTimeout(function()
+            {
+                popup.remove();
+            }, 500);
+        }
+
+    }, 5000);
+
+</script>
+
+<%
+    }
+%>
+
 </body>
 </html>
