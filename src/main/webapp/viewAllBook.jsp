@@ -1,16 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java"
+         contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+
 <%@ page import="java.util.List" %>
 <%@ page import="entity.Book" %>
+
 <html>
+
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
           rel="stylesheet">
-
 
     <style>
 
@@ -21,19 +24,11 @@
             color: #182848;
         }
 
-
-        /* =========================
-           NAVBAR
-        ========================= */
-
         .navbar {
             background: white;
             padding: 15px 35px;
-
-            box-shadow:
-                0 3px 15px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 3px 15px rgba(0,0,0,0.06);
         }
-
 
         .brand {
             font-size: 25px;
@@ -42,304 +37,184 @@
             text-decoration: none;
         }
 
-
-        .brand i {
-            color: #4b6cb7;
-            margin-right: 8px;
-        }
-
-
         .dashboard-btn {
             border-radius: 10px;
             font-weight: 600;
         }
-
-
-        /* =========================
-           MAIN
-        ========================= */
 
         .main-container {
             margin-top: 35px;
             margin-bottom: 50px;
         }
 
-
-        /* =========================
-           PAGE HEADER
-        ========================= */
-
         .page-header {
-
-            background:
-                linear-gradient(135deg, #182848, #4b6cb7);
-
+            background: linear-gradient(135deg, #182848, #4b6cb7);
             color: white;
-
             border-radius: 22px;
-
             padding: 35px;
-
-            box-shadow:
-                0 12px 30px rgba(75, 108, 183, 0.18);
+            box-shadow: 0 12px 30px rgba(75,108,183,0.18);
         }
-
 
         .page-header h1 {
             font-weight: bold;
         }
-
 
         .page-header p {
             color: #e5e7eb;
             margin-bottom: 0;
         }
 
-
         .header-icon {
             font-size: 75px;
             opacity: 0.18;
         }
 
-
-        /* =========================
-           SEARCH AREA
-        ========================= */
-
-        .search-card {
-
-            background: white;
-
-            border-radius: 18px;
-
-            padding: 20px 25px;
-
-            margin-top: 25px;
-
-            box-shadow:
-                0 8px 25px rgba(0, 0, 0, 0.05);
-        }
-
-
-        .search-box {
-
-            height: 48px;
-
-            border-radius: 10px;
-        }
-
-
-        .search-btn {
-
-            height: 48px;
-
-            border-radius: 10px;
-
-            font-weight: 600;
-        }
-
-
-        /* =========================
-           TABLE CARD
-        ========================= */
-
         .table-card {
-
             background: white;
-
             border-radius: 20px;
-
             margin-top: 25px;
-
             padding: 25px;
-
-            box-shadow:
-                0 8px 25px rgba(0, 0, 0, 0.06);
-
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
             overflow-x: auto;
         }
 
-
         .table {
-
             vertical-align: middle;
-
             margin-bottom: 0;
         }
 
-
         .table thead {
-
             background: #f1f5ff;
         }
 
-
         .table thead th {
-
             color: #374151;
-
             font-size: 14px;
-
             font-weight: 700;
-
             padding: 16px;
-
             border: none;
-
             white-space: nowrap;
         }
-
 
         .table tbody td {
-
             padding: 15px;
-
             border-color: #eef0f4;
-
             white-space: nowrap;
         }
 
-
         .table tbody tr {
-
             transition: 0.2s;
         }
 
-
         .table tbody tr:hover {
-
             background: #f8faff;
         }
 
-
-        /* =========================
-           BOOK IMAGE
-        ========================= */
-
-        .book-cover {
-
-            width: 55px;
-            height: 70px;
-
-            object-fit: cover;
-
-            border-radius: 8px;
-
-            box-shadow:
-                0 4px 10px rgba(0,0,0,0.12);
-        }
-
-
-        /* =========================
-           BOOK NAME
-        ========================= */
-
         .book-name {
-
             font-weight: 700;
             color: #182848;
         }
 
-
         .author {
-
             color: #6b7280;
             font-size: 14px;
         }
 
-
-        /* =========================
-           CATEGORY
-        ========================= */
-
-        .category {
-
-            background: #eef2ff;
-
-            color: #4b6cb7;
-
-            padding: 6px 12px;
-
-            border-radius: 20px;
-
-            font-size: 13px;
-
-            font-weight: 600;
-        }
-
-
-        /* =========================
-           PRICE
-        ========================= */
-
         .price {
-
             font-weight: 700;
-
             color: #198754;
         }
 
-
-        /* =========================
-           QUANTITY
-        ========================= */
-
         .quantity {
-
             font-weight: 600;
         }
 
-
-        /* =========================
-           ACTION BUTTONS
-        ========================= */
-
-        .action-btn {
-
-            width: 38px;
-            height: 38px;
-
-            border-radius: 9px;
-
-            display: inline-flex;
-
+        .success-popup {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            min-width: 320px;
+            padding: 16px 20px;
+            border-radius: 12px;
+            background: #198754;
+            color: white;
+            display: flex;
             align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.20);
+            z-index: 9999;
+            animation: popupShow 0.4s ease;
+        }
 
+        .error-popup {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            min-width: 320px;
+            padding: 16px 20px;
+            border-radius: 12px;
+            background: #dc3545;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.20);
+            z-index: 9999;
+            animation: popupShow 0.4s ease;
+        }
+
+        .popup-icon {
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.20);
+            display: flex;
+            align-items: center;
             justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
         }
 
-
-        /* =========================
-           EMPTY / FOOTER
-        ========================= */
-
-        .table-footer {
-
-            margin-top: 20px;
-
-            color: #6b7280;
-
-            font-size: 14px;
+        .success-popup.hide,
+        .error-popup.hide {
+            animation: popupHide 0.5s ease forwards;
         }
 
+        @keyframes popupShow {
+
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popupHide {
+
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+        }
 
         footer {
-
             text-align: center;
-
             color: #6b7280;
-
             padding: 25px;
-
             font-size: 14px;
         }
 
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media(max-width: 768px) {
+        @media(max-width:768px) {
 
             .navbar {
                 padding: 15px 20px;
@@ -357,17 +232,24 @@
                 padding: 15px;
             }
 
+            .success-popup,
+            .error-popup {
+                right: 15px;
+                left: 15px;
+                bottom: 15px;
+                min-width: auto;
+            }
         }
 
     </style>
+
 </head>
+
 <body>
+
 <nav class="navbar">
 
     <div class="container-fluid">
-
-
-        <!-- LOGO -->
 
         <a href="login_success.jsp"
            class="brand">
@@ -376,29 +258,19 @@
 
         </a>
 
-
-        <!-- DASHBOARD -->
-
         <a href="login_success.jsp"
            class="btn btn-outline-primary dashboard-btn">
 
-            👈
-
-            Dashboard
+            👈 Dashboard
 
         </a>
-
 
     </div>
 
 </nav>
 
+
 <div class="container main-container">
-
-
-    <!-- =================================
-         HEADER
-    ================================== -->
 
     <div class="page-header">
 
@@ -407,28 +279,19 @@
             <div class="col-md-9">
 
                 <p class="fw-semibold mb-2">
-
                     BOOK MANAGEMENT
-
                 </p>
 
-
                 <h1>
-
                     All Books
-
                 </h1>
 
-
                 <p>
-
                     View and manage all books available
                     in your library.
-
                 </p>
 
             </div>
-
 
             <div class="col-md-3 text-center">
 
@@ -440,68 +303,60 @@
 
     </div>
 
-    <div class="table-card">
 
+    <div class="table-card">
 
         <div class="d-flex justify-content-between
                     align-items-center mb-3">
 
-
             <h4 class="fw-bold mb-0">
-
                 📚 Books Collection
-
             </h4>
 
         </div>
 
 
-
         <table class="table">
-
-
-            <!-- TABLE HEADER -->
 
             <thead>
 
                 <tr>
 
-                    <th>
-                        Code
-                    </th>
+                    <th>Code</th>
 
-                    <th>
-                        Name
-                    </th>
+                    <th>Name</th>
 
-                    <th>
-                        Author
-                    </th>
+                    <th>Author</th>
 
-                    <th>
-                        Price
-                    </th>
+                    <th>Price</th>
 
-                    <th>
-                        Quantity
-                    </th>
+                    <th>Quantity</th>
 
-                    <th>
-                        Action
-                    </th>
+                    <th>Action</th>
+
                 </tr>
 
             </thead>
+
+
             <tbody>
-             <% List<Book> books = (List<Book>) request.getAttribute("list");
-                    for(Book b : books)
-                 {
-             %>
+
+            <%
+                List<Book> books =
+                        (List<Book>) request.getAttribute("list");
+
+                if (books != null && !books.isEmpty())
+                {
+                    for (Book b : books)
+                    {
+            %>
+
                 <tr>
+
                     <td>
 
                         <strong>
-                            <%=b.getCode() %>
+                            <%= b.getCode() %>
                         </strong>
 
                     </td>
@@ -510,49 +365,151 @@
                     <td>
 
                         <div class="book-name">
-                        <%=b.getName() %>
+                            <%= b.getName() %>
                         </div>
 
                     </td>
 
 
                     <td>
+
                         <div class="author">
-                        <%=b.getAuthor() %>
+                            <%= b.getAuthor() %>
                         </div>
-                    </td>
-                    <td class="price">
-                    <%=b.getPrice() %>
-                    </td>
-                    <td class="quantity">
-                    <%=b.getQty() %>
+
                     </td>
 
+
                     <td class="price">
-                    <button class="btn btn-primary fw-bold text-decoration-none"><a href="editservlet?code=<%=b.getCode()%>" class="text-dark">Edit</a></button>
-                        <form action="delete" method="post" style="display:inline;">
-                            <input type="hidden" name="code" value="<%=b.getCode()%>">
+
+                        <%= b.getPrice() %>
+
+                    </td>
+
+
+                    <td class="quantity">
+
+                        <%= b.getQty() %>
+
+                    </td>
+
+
+                    <td>
+
+                        <a href="editservlet?code=<%= b.getCode() %>"
+                           class="btn btn-primary fw-bold">
+
+                            ✏️ Edit
+
+                        </a>
+
+
+                        <form action="delete"
+                              method="post"
+                              style="display:inline;">
+
+                            <input type="hidden"
+                                   name="code"
+                                   value="<%= b.getCode() %>">
 
                             <button type="submit"
                                     class="btn btn-danger fw-bold"
                                     onclick="return confirm('Are you sure you want to delete this book?');">
+
                                 🗑️ Delete
+
                             </button>
+
                         </form>
+
                     </td>
 
                 </tr>
-                <%
-                        }
-                %>
+
+            <%
+                    }
+                }
+                else
+                {
+            %>
+
+                <tr>
+
+                    <td colspan="6"
+                        class="text-center py-5">
+
+                        📚 No Books Available
+
+                    </td>
+
+                </tr>
+
+            <%
+                }
+            %>
+
             </tbody>
+
         </table>
+
     </div>
+
 </div>
-  <footer>
 
-      © 2026 BookVault · Book Management System
 
-  </footer>
+<footer>
+
+    © 2026 BookVault · Book Management System
+
+</footer>
+
+
+<%
+    String message = (String) request.getAttribute("msg");
+
+    if (message != null)
+    {
+%>
+
+<div class="success-popup"
+     id="successPopup">
+
+    <div class="popup-icon">
+        ✓
+    </div>
+
+    <div>
+        <%= message %>
+    </div>
+
+</div>
+
+<script>
+
+    setTimeout(function()
+    {
+        const popup =
+            document.getElementById("successPopup");
+
+        if (popup)
+        {
+            popup.classList.add("hide");
+
+            setTimeout(function()
+            {
+                popup.remove();
+            }, 500);
+        }
+
+    }, 5000);
+
+</script>
+
+<%
+    }
+%>
+
+
 </body>
+
 </html>
